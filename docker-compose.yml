@@ -1,0 +1,41 @@
+version: '2'
+services:
+    measureplatform-app:
+        build: ./measure-platform
+        external_links:
+            - measureplatform-mysql:mysql
+            - measureplatform-elasticsearch
+            - measureplatform-kibana
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/measureplatform?useUnicode=true&characterEncoding=utf8&useSSL=false
+            #- JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    measureplatform-mysql:
+        extends:
+            file: mysql.yml
+            service: measureplatform-mysql
+    measureplatform-elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+        command: /elasticsearch/bin/elasticsearch -E network.bind_host=0.0.0.0 -Ehttp.max_content_length=500mb
+        expose:
+            - 9200
+        ports:
+            - 9200:9200
+            #- 9300:9300
+        environment:
+            #- 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m'
+            #- 'discovery.type=single-node'
+            - ES_JAVA_OPTS=-Xms2g -Xmx2g
+            - ES_TMPDIR=/tmp
+    measureplatform-kibana:
+        image: docker.elastic.co/kibana/kibana:6.5.4
+        external_links:
+            - measureplatform-elasticsearch
+        expose:
+            - 5601
+        ports:
+            - 5601:5601
+        environment:
+            - ELASTICSEARCH_URL=https://elasticsearch:9200
