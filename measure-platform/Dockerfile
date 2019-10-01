@@ -11,7 +11,10 @@ COPY application.properties application.properties
 # Run jar
 #RUN sh -c 'touch /measure-platform-0.9.0.war'
 #VOLUME /tmp
+
 EXPOSE 8080
+
 #CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && sleep ${JHIPSTER_SLEEP}
 #    java -Djava.security.egd=file:/dev/./urandom -jar /app.war
+
 ENTRYPOINT ["java","-jar","measure-platform-0.9.0.war"]

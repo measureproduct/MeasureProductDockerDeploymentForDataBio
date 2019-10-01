@@ -1,41 +1,83 @@
-version: '2'
+version: '3'
 services:
-    measureplatform-app:
-        build: ./measure-platform
-        external_links:
-            - measureplatform-mysql:mysql
-            - measureplatform-elasticsearch
-            - measureplatform-kibana
-        environment:
-            - SPRING_PROFILES_ACTIVE=prod,swagger
-            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/measureplatform?useUnicode=true&characterEncoding=utf8&useSSL=false
-            #- JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
-        ports:
-            - 8080:8080
+    # measureplatform-app:
+    #     build: ./measure-platform
+    #     external_links:
+    #         - measureplatform-mysql:mysql
+    #         - measureplatform-elasticsearch
+    #         - measureplatform-kibana
+    #     environment:
+    #         - SPRING_PROFILES_ACTIVE=prod,swagger
+    #         - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/measureplatform?useUnicode=true&characterEncoding=utf8&useSSL=false
+    #         #- JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    #     ports:
+    #         - 8080:8080
     measureplatform-mysql:
-        extends:
-            file: mysql.yml
-            service: measureplatform-mysql
-    measureplatform-elasticsearch:
+        image: mysql:5.7.13
+        networks:
+            - default
+        #volumes:
+        #     - ~/volumes/jhipster/MeasurePlatform/mysql/:/var/lib/mysql/
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            #- MYSQL_DATABASE=measureplatform
+        ports:
+            - 3306:3306
+        command: mysqld --lower_case_table_names=1 --skip-ssl
+    # measureplatform-elasticsearch:
+    #     container_name: measureplatform-elasticsearch
+    #     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    #     networks:
+    #         - default
+    #     command: /elasticsearch/bin/elasticsearch -E network.bind_host=0.0.0.0 -Ehttp.max_content_length=500mb
+    #     environment:
+    #         - 'cluster.name=docker-cluster'
+    #         - 'ES_JAVA_OPTS=-Xms2g -Xmx2g'
+    #         - 'discovery.type=single-node'
+    #         - 'ES_TMPDIR=/tmp'
+    #     expose:
+    #         - 9200
+    #     ports:
+    #         - 9200:9200
+    #         - 9300:9300
+    # measureplatform-kibana:
+    #     container_name: measureplatform-kibana
+    #     image: docker.elastic.co/kibana/kibana:6.5.4
+    #     networks:
+    #         - default
+    #     depends_on:
+    #         - measureplatform-elasticsearch
+    #     environment:
+    #         - 'SERVER_HOST: 0.0.0.0'
+    #         - 'ELASTICSEARCH_URL: http://elasticsearch:9300'
+    #     expose:
+    #         - 5601
+    #     ports:
+    #         - 5601:5601
+    elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
-        command: /elasticsearch/bin/elasticsearch -E network.bind_host=0.0.0.0 -Ehttp.max_content_length=500mb
+        networks:
+            - default
+        environment:
+            - cluster.name=docker-cluster
+            - ES_JAVA_OPTS=-Xms2g -Xmx2g
+            - discovery.type=single-node
         expose:
             - 9200
         ports:
             - 9200:9200
-            #- 9300:9300
-        environment:
-            #- 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m'
-            #- 'discovery.type=single-node'
-            - ES_JAVA_OPTS=-Xms2g -Xmx2g
-            - ES_TMPDIR=/tmp
-    measureplatform-kibana:
+            - 9300:9300
+    kibana:
         image: docker.elastic.co/kibana/kibana:6.5.4
-        external_links:
-            - measureplatform-elasticsearch
+        networks:
+            - default
+        environment:
+            - 'SERVER_HOST: 0.0.0.0'
+            - 'ELASTICSEARCH_URL: http://elasticsearch:9200'
+        depends_on:
+             - elasticsearch
         expose:
             - 5601
         ports:
-            - 5601:5601
-        environment:
-            - ELASTICSEARCH_URL=https://elasticsearch:9200
+            - "5601:5601"
