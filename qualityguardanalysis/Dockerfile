@@ -10,10 +10,14 @@ RUN wget https://github.com/ITEA3-Measure/QualityGuardAnalysis/releases/download
 
 COPY application.properties application.properties
 
+#COPY wait-for-it.sh ./wait-for-it.sh
+
+#RUN chmod +x ./wait-for-it.sh
+
 #CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && \
 #    sleep ${JHIPSTER_SLEEP} && \
 #    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.war
 
-EXPOSE 8585
+EXPOSE 8085
 
 ENTRYPOINT ["java","-jar","quality-guard-analysis-1.2.0.war"]

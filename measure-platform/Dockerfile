@@ -8,9 +8,9 @@ RUN wget https://github.com/ITEA3-Measure/MeasurePlatform/releases/download/0.9.
 
 COPY application.properties application.properties
 
-COPY wait-for-it.sh wait-for-it.sh
+#COPY wait-for-it.sh ./wait-for-it.sh
 
-RUN chmod +x wait-for-it.sh
+#RUN chmod +x ./wait-for-it.sh
 
 # Run jar
 #RUN sh -c 'touch /measure-platform-0.9.0.war'
