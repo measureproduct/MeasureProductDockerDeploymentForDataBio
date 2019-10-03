@@ -1,8 +1,8 @@
-version: '2'
+version: '3'
 services:
-    mysql:
+    mysql-db:
         #container_name: measureplatform-mysql
-        image: mysql:5.7.13
+        build: ./mysql-db
         networks:
             - default
         #volumes:
@@ -15,4 +15,4 @@ services:
             - 3306        
         ports:
             - 3306:3306
-        command: mysqld --lower_case_table_names=1 --skip-ssl
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp

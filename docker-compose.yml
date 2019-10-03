@@ -42,8 +42,8 @@ services:
     mysql-db:
         # extends:
         #     file: mysql.yml
-        #     service: mysql
-        image: mysql:5.7.13
+        #     service: mysql-db
+        build: ./mysql-db
         networks:
             - default
         #volumes:
@@ -53,7 +53,7 @@ services:
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_DATABASE=measureplatform
         expose:
-            - 3306        
+            - 3306
         ports:
             - 3306:3306
         command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
@@ -67,6 +67,7 @@ services:
             - discovery.type=single-node
         expose:
             - 9200
+            - 9300
         ports:
             - 9200:9200
             - 9300:9300
