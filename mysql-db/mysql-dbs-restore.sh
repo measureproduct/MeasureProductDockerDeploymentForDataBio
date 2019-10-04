@@ -20,22 +20,22 @@ read -s PASS
 echo ""
 
 # Extract files from .gz archives:
-function gzip_extract {
+# function gzip_extract {
 
-  for filename in *.gz
-    do
-      echo "extracting $filename"
-      gzip -d $filename
-    done
-}
+#   for filename in *.gz
+#     do
+#       echo "extracting $filename"
+#       gzip -d $filename
+#     done
+# }
 
 # Look for sql.gz files:
-if [ "$(ls -A *.sql.gz 2> /dev/null)" ]  ; then
-  echo "sql.gz files found extracting..."
-  gzip_extract
-else
-  echo "No sql.gz files found"
-fi
+# if [ "$(ls -A *.sql.gz 2> /dev/null)" ]  ; then
+#   echo "sql.gz files found extracting..."
+#   gzip_extract
+# else
+#   echo "No sql.gz files found"
+# fi
 
 # Exit when folder doesn't have .sql files:
 if [ "$(ls -A *.sql 2> /dev/null)" == 0 ]; then
