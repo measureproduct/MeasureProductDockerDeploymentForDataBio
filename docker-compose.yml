@@ -3,7 +3,7 @@ services:
     measureplatform-app:
         build: 
             context: ./measure-platform
-        #entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "-t", "0", "--", "java","-jar","measure-platform-0.9.0.war"]
+        command: : ["./wait-for-it.sh", "mysql-db:3306", "java","-jar","measure-platform-0.9.0.war"]
         networks:
             - default
         depends_on:
