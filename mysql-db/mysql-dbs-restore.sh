@@ -15,9 +15,9 @@ USER="root"
 HOST="localhost"
 
 # Read mysql root password:
-echo -n "Type mysql root password: "
-read -s PASS
-echo ""
+# echo -n "Type mysql root password: "
+# read -s PASS
+# echo ""
 
 # Extract files from .gz archives:
 # function gzip_extract {
@@ -44,7 +44,7 @@ if [ "$(ls -A *.sql 2> /dev/null)" == 0 ]; then
 fi
 
 # Get all database list first
-DBS="$(mysql -u $USER -h $HOST -p$PASS -Bse 'show databases')"
+DBS="$(mysql -u $USER -h $HOST -Bse 'show databases')"
 
 echo "These are the current existing Databases:"
 echo $DBS
@@ -81,10 +81,10 @@ do
       echo "Database: $dbname already exist, skiping create"
     else
       echo "Creating DB: $dbname"
-      mysqladmin create $dbname -u $USER -p$PASS
+      mysqladmin create $dbname -u $USER
     fi
     
     echo "Importing DB: $dbname from $filename"
-    mysql $dbname < $filename -u $USER -p$PASS
+    mysql $dbname < $filename -u $USER
   fi    
 done

@@ -48,10 +48,10 @@ services:
             - default
         #volumes:
         #     - ~/volumes/jhipster/MeasurePlatform/mysql/:/var/lib/mysql/
-        environment:
-            - MYSQL_USER=root
-            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-            - MYSQL_DATABASE=measureplatform
+        # environment:
+        #     - MYSQL_USER=root
+        #     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+        #     - MYSQL_DATABASE=measureplatform
         expose:
             - 3306
         ports:

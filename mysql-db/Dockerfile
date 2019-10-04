@@ -1,8 +1,8 @@
-FROM mysql:5.7.13
+FROM mysql:5.7
 
-ENV MYSQL_USER root
-ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
-ENV MYSQL_DATABASE measureplatform
+#ENV MYSQL_USER root
+#ENV MYSQL_ALLOW_EMPTY_PASSWORD yes
+#ENV MYSQL_DATABASE measureplatform
 
 ADD ./measureplatform.sql /home
 
@@ -13,3 +13,6 @@ RUN chmod 777 /home/mysql-dbs-restore.sh
 
 CMD ["/bin/bash", "/home/mysql-dbs-restore.sh"]
 
+ENTRYPOINT service mysql start && /home/mysql-dbs-restore.sh
+
+EXPOSE 3306
