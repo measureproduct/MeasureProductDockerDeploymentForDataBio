@@ -1,10 +1,10 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk:8
 
 #ENV JHIPSTER_SLEEP 0
 
-RUN wget https://github.com/ITEA3-Measure/MeasurePlatform/releases/download/0.9.00/MeasurePlatform-0.9.zip \
-&& unzip MeasurePlatform-0.9.zip \
-&& rm MeasurePlatform-0.9.zip 
+RUN wget https://github.com/ITEA3-Measure/MeasurePlatform/releases/download/MeasurePlatform/MeasurePlatform.V1.0.0.zip \
+&& unzip MeasurePlatform.V1.0.0.zip \
+&& rm MeasurePlatform.V1.0.0.zip 
 
 COPY application.properties application.properties
 
@@ -21,4 +21,4 @@ EXPOSE 8080
 #CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && sleep 10
 #    java -Djava.security.egd=file:/dev/./urandom -jar /app.war
 
-ENTRYPOINT ["java","-jar","measure-platform-0.9.0.war"]
+ENTRYPOINT ["java","-jar","measure-platform-1.0.0.war"]

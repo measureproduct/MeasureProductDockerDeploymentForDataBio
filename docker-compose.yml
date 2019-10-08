@@ -1,9 +1,10 @@
 version: '3'
 services:
     measureplatform-app:
+        container_name: measureplatform-app
         build: 
             context: ./measure-platform
-        command: ["./wait-for-it.sh", "mysql-db:3306", "java","-jar","measure-platform-0.9.0.war"]
+        entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "java","-jar","measure-platform-1.0.0.war"]
         networks:
             - default
         depends_on:
@@ -20,6 +21,7 @@ services:
         ports:
             - 8080:8080
     # qualityguardanalysis-app:
+    #     container_name: qualityguardanalysis-app
     #     build: 
     #         context: ./qualityguardanalysis
     #     #entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "-t", "0", "--", "java","-jar","quality-guard-analysis-1.2.0.war"]
@@ -43,28 +45,34 @@ services:
         # extends:
         #     file: mysql.yml
         #     service: mysql-db
+        container_name: mysql-db
         build: ./mysql-db
         networks:
             - default
         #volumes:
         #     - ~/volumes/jhipster/MeasurePlatform/mysql/:/var/lib/mysql/
         # environment:
-        #     - MYSQL_USER=root
-        #     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-        #     - MYSQL_DATABASE=measureplatform
+        #     - MYSQL_ROOT_PASSWORD root
+        #     - MYSQL_DATABASE measureplatform
+        #     - MYSQL_USER user
+        #     - MYSQL_PASSWORD user
         expose:
             - 3306
         ports:
             - 3306:3306
         command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
     elasticsearch:
+        container_name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
         networks:
             - default
+        command: /elasticsearch/bin/elasticsearch -E network.bind_host=0.0.0.0 -Ehttp.max_content_length=500mb
         environment:
-            - cluster.name=docker-cluster
-            - ES_JAVA_OPTS=-Xms2g -Xmx2g
-            - discovery.type=single-node
+            cluster.name: docker-cluster
+            ES_JAVA_OPTS: -Xms2g -Xmx2g
+            network.bind_host: 0.0.0.0
+            network.host: 0.0.0.0
+            discovery.type: single-node
         expose:
             - 9200
             - 9300
@@ -72,6 +80,7 @@ services:
             - 9200:9200
             - 9300:9300
     kibana:
+        container_name: kibana
         image: docker.elastic.co/kibana/kibana:6.5.4
         networks:
             - default
