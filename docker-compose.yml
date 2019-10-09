@@ -38,9 +38,6 @@ services:
         ports:
             - 8085:8085
     mysql-db:
-        # extends:
-        #     file: mysql.yml
-        #     service: mysql-db
         container_name: mysql-db
         build: ./mysql-db
         entrypoint: 
