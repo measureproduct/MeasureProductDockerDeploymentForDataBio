@@ -18,33 +18,33 @@ services:
             - 8080
         ports:
             - 8080:8080
-    # qualityguardanalysis-app:
-    #     container_name: qualityguardanalysis-app
-    #     build: 
-    #         context: ./qualityguardanalysis
-    #     #entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "-t", "0", "--", "java","-jar","quality-guard-analysis-1.2.0.war"]
-    #     networks:
-    #         - default
-    #     depends_on:
-    #         - measureplatform-app
-    #         - mysql-db
-    #         - elasticsearch
-    #         - kibana
-    #     environment:
-    #         - _JAVA_OPTIONS=-Xmx512m -Xms256m
-    #         #- SPRING_PROFILES_ACTIVE=prod,swagger
-    #         - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/qualityguardanalysis?useUnicode=true&characterEncoding=utf8&useSSL=false
-    #         #- JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
-    #     expose:
-    #         - 8085
-    #     ports:
-    #         - 8085:8085
+    qualityguardanalysis-app:
+        container_name: qualityguardanalysis-app
+        build: 
+            context: ./qualityguardanalysis
+        entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "java","-jar","quality-guard-analysis-1.2.0.war"]
+        networks:
+            - default
+        depends_on:
+            - measureplatform-app
+            - mysql-db
+            - elasticsearch
+            - kibana
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            #- SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/qualityguardanalysis?useUnicode=true&characterEncoding=utf8&useSSL=false
+        expose:
+            - 8085
+        ports:
+            - 8085:8085
     mysql-db:
         # extends:
         #     file: mysql.yml
         #     service: mysql-db
         container_name: mysql-db
         build: ./mysql-db
+        entrypoint: 
+            sh -c "echo 'CREATE DATABASE IF NOT EXISTS measureplatform; CREATE DATABASE IF NOT EXISTS qualityguardanalysis;' > /docker-entrypoint-initdb.d/init.sql; /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
         networks:
             - default
         # environment:
