@@ -1,19 +1,47 @@
-FROM openjdk:8
+FROM openjdk:8-jre-alpine
+
+LABEL description="Image with the Measure-Platform"
 
 WORKDIR /home
 
-RUN wget https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform/MeasurePlatform.V1.0.0.zip \
-&& unzip MeasurePlatform.V1.0.0.zip \
-&& rm MeasurePlatform.V1.0.0.zip 
+# MeasurePlatform packaging
+ENV ZIP_URL=https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform-1.0.1/MeasurePlatform.V1.0.1.zip
+ENV ZIP_FILE=MeasurePlatform.V1.0.1.zip
+ENV JAR_FILE=measure-platform-1.0.1.war
+# Spring data jpa configuration
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/measureplatform?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+ENV MYSQL_USER=root
+ENV MYSQL_ALLOW_EMPTY_PASSWORD=yes
+ENV MYSQL_DRIVER=com.mysql.jdbc.Driver
+# Datasources storage path
+ENV MEASUREPLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures/
+ENV MEASUREPLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications/
+# Mailing service configuration
+ENV SPRING_MAIL_USERNAME=
+ENV SPRING_MAIL_PASSWORD=
+ENV SPRING_MAIL_HOST=
+ENV SPRING_MAIL_PORT=
+ENV SPRING_MAIL_PROTOCOL=
+ENV SPRING_MAIL_TLS=
+ENV SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=
+ENV SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=
+ENV SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST=
+
+RUN apk add --update bash \
+            curl \
+            unzip \
+&& rm -rf /var/cache/apk/*
+
+RUN wget ${ZIP_URL} \
+&& unzip ${ZIP_FILE} \
+&& rm ${ZIP_FILE} 
 
 COPY application.properties ./application.properties
 
 COPY wait-for-it.sh ./wait-for-it.sh
 RUN chmod +x ./wait-for-it.sh
 
-# COPY startup.sh ./startup.sh
-# RUN chmod +x ./startup.sh && ./startup.sh
+COPY startup.sh ./startup.sh
+RUN chmod +x ./startup.sh && ./startup.sh
 
-EXPOSE 8080
-
-ENTRYPOINT ["java","-jar","./measure-platform-1.0.0.war"]
+ENTRYPOINT ["java","-jar","${JAR_FILE}"]
