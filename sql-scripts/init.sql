@@ -1,0 +1,1 @@
+CREATE DATABASE IF NOT EXISTS measureplatform; CREATE DATABASE IF NOT EXISTS qualityguardanalysis;

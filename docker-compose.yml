@@ -51,18 +51,20 @@ services:
             - 8085:8085
     mysql-db:
         container_name: mysql-db
-        build: ./mysql-db
+        # build: ./mysql-db
+        image: mysql:5.7
         depends_on: 
             - apache-reverse-proxy
         entrypoint: 
             sh -c "echo 'CREATE DATABASE IF NOT EXISTS measureplatform; CREATE DATABASE IF NOT EXISTS qualityguardanalysis;' > /docker-entrypoint-initdb.d/init.sql; /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+        volumes: 
+            - ./sql-scripts:/docker-entrypoint-initdb.d/ 
         networks:
             - default
-        # environment:
-        #     - MYSQL_ROOT_PASSWORD root
-        #     - MYSQL_DATABASE measureplatform
-        #     - MYSQL_USER user
-        #     - MYSQL_PASSWORD user
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=measureplatform
         expose:
             - 3306
         ports:

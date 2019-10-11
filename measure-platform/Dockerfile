@@ -11,8 +11,8 @@ COPY application.properties ./application.properties
 COPY wait-for-it.sh ./wait-for-it.sh
 RUN chmod +x ./wait-for-it.sh
 
-COPY startup.sh ./startup.sh
-RUN chmod +x ./startup.sh && ./startup.sh
+# COPY startup.sh ./startup.sh
+# RUN chmod +x ./startup.sh && ./startup.sh
 
 EXPOSE 8080
 
