@@ -32,8 +32,8 @@ services:
             - ZIP_CATALOGUE_URL=https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip
             - ZIP_CATALOGUE_FILE=DataSourceCatalog.zip
             # Datasources storage path (mandatory)
-            - MEASUREPLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures/
-            - MEASUREPLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications/
+            - MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures/
+            - MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications/
             # Spring data jpa configuration (mandatory)
             - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/measureplatform?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
             - MYSQL_USER=root
@@ -75,7 +75,7 @@ services:
             - MYSQL_USER=root
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_DRIVER=com.mysql.jdbc.Driver
-            # MEASURE PLATFORM Administrator
+            # MeasurePlatform administrator
             - MEASURE_PLATFORM_LOGIN=admin
             - MEASURE_PLATFORM_PASSWORD=admin
             # Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")

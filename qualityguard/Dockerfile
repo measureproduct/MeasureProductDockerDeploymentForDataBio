@@ -21,6 +21,7 @@ ENV ELASTICSEARCH_CLUSTER_NAME=docker-cluster
 
 RUN apk add --update bash \
             curl \
+            unzip \
 && rm -rf /var/cache/apk/*
 
 RUN wget ${ZIP_URL} \
