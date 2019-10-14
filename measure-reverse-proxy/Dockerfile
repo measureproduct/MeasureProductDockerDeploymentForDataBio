@@ -5,6 +5,8 @@ LABEL description="Image with the Measure-Reverse-Proxy"
 #ENV APACHE_RUN_USER www-data
 #ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
+# The Host IP address
+ENV HOST_IP_ADDR=localhost
 
 RUN apt-get update && apt-get install -y apache2 && apt-get clean
 
