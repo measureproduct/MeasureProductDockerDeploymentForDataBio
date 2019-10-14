@@ -7,8 +7,8 @@ services:
         networks:
             - default
         environment:
-            ## The Host IP address configuration (mandatory) 
-            - HOST_IP_ADDR=10.78.4.15
+            ## The Host IP address configuration (optional) 
+            #- HOST_IP_ADDR=
         expose:
             - 80
         ports:
@@ -26,20 +26,8 @@ services:
             - elasticsearch
             - kibana
         environment:
-            ## The Host IP address configuration (mandatory) 
-            - HOST_IP_ADDR=10.78.4.15
-            ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
-            - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
-            ## Mailing service configuration (mandatory)
-            - SPRING_MAIL_USERNAME=
-            - SPRING_MAIL_PASSWORD=
-            - SPRING_MAIL_HOST=
-            - SPRING_MAIL_PORT=
-            - SPRING_MAIL_PROTOCOL=
-            - SPRING_MAIL_TLS=
-            - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=
-            - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=
-            - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST=
+            ## The Host IP address configuration (optional) 
+            #- HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
             ## Spring data jpa configuration (optional)
@@ -57,6 +45,18 @@ services:
             ## Datasources storage path (optional)
             # - MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures/
             # - MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications/
+            ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
+            - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
+            ## Mailing service configuration (mandatory)
+            - SPRING_MAIL_USERNAME=
+            - SPRING_MAIL_PASSWORD=
+            - SPRING_MAIL_HOST=
+            - SPRING_MAIL_PORT=
+            - SPRING_MAIL_PROTOCOL=
+            - SPRING_MAIL_TLS=
+            - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=
+            - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=
+            - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST=
         expose:
             - 8080
     qualityguard-app:
@@ -73,10 +73,8 @@ services:
             - elasticsearch
             - kibana
         environment:
-            ## The Host IP address configuration (mandatory) 
-            - HOST_IP_ADDR=10.78.4.15
-            ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
-            - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
+            ## The Host IP address configuration (optional) 
+            #- HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
             ## Spring data jpa configuration (optional)
@@ -91,6 +89,8 @@ services:
             ## MeasurePlatform administrator (optional)
             # - MEASURE_PLATFORM_LOGIN=admin
             # - MEASURE_PLATFORM_PASSWORD=admin
+            ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
+            - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
         expose:
             - 8085
     mysql-db:
