@@ -1,9 +1,9 @@
 #!/bin/sh
 
-ZIP_CATALOGUE_URL="https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip"
-ZIP_CATALOGUE_FILE="DataSourceCatalog.zip"
-MEASURE_PLATFORM_STORAGE_APPLICATION="/home/PackagedPlatform/storage/applications"
-MEASURE_PLATFORM_STORAGE_MEASURE="/home/PackagedPlatform/storage/measures"
+#ZIP_CATALOGUE_URL="https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip"
+#ZIP_CATALOGUE_FILE="DataSourceCatalog.zip"
+#MEASURE_PLATFORM_STORAGE_APPLICATION="/home/PackagedPlatform/storage/applications"
+#MEASURE_PLATFORM_STORAGE_MEASURE="/home/PackagedPlatform/storage/measures"
 
 wget ${ZIP_CATALOGUE_URL}
 unzip ./${ZIP_CATALOGUE_FILE} -d ./tmp

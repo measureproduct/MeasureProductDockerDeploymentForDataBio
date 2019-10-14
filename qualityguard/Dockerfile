@@ -4,15 +4,15 @@ LABEL description="Image with the Quality-Guard"
 
 WORKDIR /home
 
-# QualityGuard packaging
-ENV ZIP_URL=https://github.com/measureproduct/QualityGuard/releases/download/v1.2.0/quality-guard-v1.2.0.zip
-ENV ZIP_FILE=quality-guard-v1.2.0.zip
-ENV JAR_FILE=quality-guard-analysis-1.2.0.war
 # Spring data jpa configuration
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/qualityguard?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
 ENV MYSQL_USER=root
 ENV MYSQL_ALLOW_EMPTY_PASSWORD=yes
 ENV MYSQL_DRIVER=com.mysql.jdbc.Driver
+# QualityGuard packaging
+ENV ZIP_URL=https://github.com/measureproduct/QualityGuard/releases/download/v1.2.0/quality-guard-v1.2.0.zip
+ENV ZIP_FILE=quality-guard-v1.2.0.zip
+ENV JAR_FILE=quality-guard-analysis-1.2.0.war
 # MEASURE PLATFORM Administrator
 ENV MEASURE_PLATFORM_LOGIN=admin
 ENV MEASURE_PLATFORM_PASSWORD=admin

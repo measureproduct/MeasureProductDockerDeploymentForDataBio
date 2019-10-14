@@ -1,9 +1,9 @@
 version: '3'
 services:
-    apache-reverse-proxy:
-        container_name: apache-reverse-proxy
+    measure-reverse-proxy:
+        container_name: measure-reverse-proxy
         build: 
-            context: ./apache-reverse-proxy
+            context: ./measure-reverse-proxy
         networks:
             - default
         expose:
@@ -18,28 +18,31 @@ services:
         networks:
             - default
         depends_on:
-            - apache-reverse-proxy
+            - measure-reverse-proxy
             - mysql-db
             - elasticsearch
             - kibana
         environment:
-            - _JAVA_OPTIONS=-Xmx512m -Xms256m
-            # MeasurePlatform packaging
-            - ZIP_URL=https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform-1.0.1/MeasurePlatform.V1.0.1.zip
-            - ZIP_FILE=MeasurePlatform.V1.0.1.zip
-            - JAR_FILE=measure-platform-1.0.1.war
-            # Datasource catalogue
-            - ZIP_CATALOGUE_URL=https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip
-            - ZIP_CATALOGUE_FILE=DataSourceCatalog.zip
-            # Datasources storage path (mandatory)
-            - MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures/
-            - MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications/
-            # Spring data jpa configuration (mandatory)
-            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/measureplatform?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
-            - MYSQL_USER=root
-            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-            - MYSQL_DRIVER=com.mysql.jdbc.Driver
-            # Mailing service configuration (optional)
+            ## Docker base image jvm memory allocation (optional)
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            ## MeasurePlatform packaging (optional)
+            # - ZIP_URL=https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform-1.0.1/MeasurePlatform.V1.0.1.zip
+            # - ZIP_FILE=MeasurePlatform.V1.0.1.zip
+            # - JAR_FILE=measure-platform-1.0.1.war
+            ## Datasource catalogue (optional)
+            # - ZIP_CATALOGUE_URL=https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip
+            # - ZIP_CATALOGUE_FILE=DataSourceCatalog.zip
+            ## Datasources storage path (optional)
+            # - MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures/
+            # - MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications/
+            ## Spring data jpa configuration (optional)
+            # - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/measureplatform?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
+            # - MYSQL_USER=root
+            # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            # - MYSQL_DRIVER=com.mysql.jdbc.Driver
+            ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
+            - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
+            ## Mailing service configuration (mandatory)
             - SPRING_MAIL_USERNAME=
             - SPRING_MAIL_PASSWORD=
             - SPRING_MAIL_HOST=
@@ -59,26 +62,27 @@ services:
         networks:
             - default
         depends_on:
-            - apache-reverse-proxy
+            - measure-reverse-proxy
             - measureplatform-app
             - mysql-db
             - elasticsearch
             - kibana
         environment:
-            - _JAVA_OPTIONS=-Xmx512m -Xms256m
-            # QualityGuard packaging
-            - ZIP_URL=https://github.com/measureproduct/QualityGuard/releases/download/v1.2.0/quality-guard-v1.2.0.zip
-            - ZIP_FILE=quality-guard-v1.2.0.zip
-            - JAR_FILE=quality-guard-analysis-1.2.0.war
-            # Spring data jpa configuration
-            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/qualityguard?useUnicode=true&characterEncoding=utf8&useSSL=false
-            - MYSQL_USER=root
-            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-            - MYSQL_DRIVER=com.mysql.jdbc.Driver
-            # MeasurePlatform administrator
-            - MEASURE_PLATFORM_LOGIN=admin
-            - MEASURE_PLATFORM_PASSWORD=admin
-            # Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
+            ## Docker base image jvm memory allocation (optional)
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            ## QualityGuard packaging (optional)
+            # - ZIP_URL=https://github.com/measureproduct/QualityGuard/releases/download/v1.2.0/quality-guard-v1.2.0.zip
+            # - ZIP_FILE=quality-guard-v1.2.0.zip
+            # - JAR_FILE=quality-guard-analysis-1.2.0.war
+            ## Spring data jpa configuration (optional)
+            # - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/qualityguard?useUnicode=true&characterEncoding=utf8&useSSL=false
+            # - MYSQL_USER=root
+            # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            # - MYSQL_DRIVER=com.mysql.jdbc.Driver
+            ## MeasurePlatform administrator (optional)
+            # - MEASURE_PLATFORM_LOGIN=admin
+            # - MEASURE_PLATFORM_PASSWORD=admin
+            ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
             - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
         expose:
             - 8085
@@ -86,7 +90,7 @@ services:
         container_name: mysql-db
         image: mysql:5.7
         depends_on: 
-            - apache-reverse-proxy
+            - measure-reverse-proxy
         volumes: 
             - ./data/sql-scripts:/docker-entrypoint-initdb.d/
         networks:
@@ -97,14 +101,12 @@ services:
             - MYSQL_DATABASE=measureplatform
         expose:
             - 3306
-        ports:
-            - 3306:3306
         command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
     elasticsearch:
         container_name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
         depends_on: 
-            - apache-reverse-proxy
+            - measure-reverse-proxy
         networks:
             - default
         environment:
@@ -118,7 +120,7 @@ services:
         container_name: kibana
         image: docker.elastic.co/kibana/kibana:6.5.4
         depends_on: 
-            - apache-reverse-proxy
+            - measure-reverse-proxy
         networks:
             - default
         environment:

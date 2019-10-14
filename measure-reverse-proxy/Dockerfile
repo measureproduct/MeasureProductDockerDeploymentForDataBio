@@ -1,6 +1,6 @@
 FROM ubuntu
 
-LABEL description="Image with the Apache-Reverse-Proxy"
+LABEL description="Image with the Measure-Reverse-Proxy"
 
 #ENV APACHE_RUN_USER www-data
 #ENV APACHE_RUN_GROUP www-data
