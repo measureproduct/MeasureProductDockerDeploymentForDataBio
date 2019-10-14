@@ -6,9 +6,6 @@ services:
             context: ./measure-reverse-proxy
         networks:
             - default
-        #environment:
-            ## The Host IP address configuration (optional) 
-            #- HOST_IP_ADDR=
         expose:
             - 80
         ports:
@@ -26,8 +23,6 @@ services:
             - elasticsearch
             - kibana
         environment:
-            ## The Host IP address configuration (optional) 
-            #- HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
             ## Spring data jpa configuration (optional)

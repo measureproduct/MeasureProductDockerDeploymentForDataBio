@@ -4,8 +4,6 @@ LABEL description="Image with the Measure-Platform"
 
 WORKDIR /home
 
-# The Host IP address
-ENV HOST_IP_ADDR=127.0.0.1
 # Spring data jpa configuration
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/measureplatform?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
 ENV MYSQL_USER=root
