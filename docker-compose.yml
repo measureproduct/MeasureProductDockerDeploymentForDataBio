@@ -6,7 +6,7 @@ services:
             context: ./measure-reverse-proxy
         networks:
             - default
-        environment:
+        #environment:
             ## The Host IP address configuration (optional) 
             #- HOST_IP_ADDR=
         expose:
@@ -100,6 +100,7 @@ services:
             - measure-reverse-proxy
         volumes: 
             - ./data/sql-scripts:/docker-entrypoint-initdb.d/
+            - ./data/mysql:/var/lib/mysql
         networks:
             - default
         environment:
