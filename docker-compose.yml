@@ -23,6 +23,8 @@ services:
             - elasticsearch
             - kibana
         environment:
+            ## The Host IP address configuration (optional) 
+            - HOST_IP_ADDR=10.78.4.15
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
             ## Spring data jpa configuration (optional)
