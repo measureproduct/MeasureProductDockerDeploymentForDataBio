@@ -100,7 +100,7 @@ services:
             - measure-reverse-proxy
         volumes: 
             - ./data/sql-scripts:/docker-entrypoint-initdb.d/
-            - ./data/mysql:/var/lib/mysql
+            # - ./data/mysql:/var/lib/mysql/
         networks:
             - default
         environment:

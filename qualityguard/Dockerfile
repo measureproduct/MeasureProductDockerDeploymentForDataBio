@@ -5,7 +5,7 @@ LABEL description="Image with the Quality-Guard"
 WORKDIR /home
 
 # The Host IP address
-ENV HOST_IP_ADDR=localhost
+ENV HOST_IP_ADDR=127.0.0.1
 # Spring data jpa configuration
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/qualityguard?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
 ENV MYSQL_USER=root

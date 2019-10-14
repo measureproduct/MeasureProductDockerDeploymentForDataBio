@@ -5,7 +5,7 @@ LABEL description="Image with the Measure-Platform"
 WORKDIR /home
 
 # The Host IP address
-ENV HOST_IP_ADDR=localhost
+ENV HOST_IP_ADDR=127.0.0.1
 # Spring data jpa configuration
 ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/measureplatform?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
 ENV MYSQL_USER=root
@@ -48,7 +48,7 @@ COPY application.properties ./application.properties
 COPY wait-for-it.sh ./wait-for-it.sh
 RUN chmod +x ./wait-for-it.sh
 
-COPY startup.sh ./startup.sh
-RUN chmod +x ./startup.sh && ./startup.sh
+# COPY startup.sh ./startup.sh
+# RUN chmod +x ./startup.sh && ./startup.sh
 
 ENTRYPOINT ["java","-jar","${JAR_FILE}"]
