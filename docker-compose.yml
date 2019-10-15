@@ -14,7 +14,7 @@ services:
         container_name: measureplatform-app
         build: 
             context: ./measure-platform
-        entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "java","-jar","measure-platform-1.0.1.war"]
+        entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "java","-jar","measure-platform-1.0.2.war"]
         networks:
             - default
         depends_on:
@@ -24,7 +24,7 @@ services:
             - kibana
         environment:
             ## The Host IP address configuration (optional) 
-            #- HOST_IP_ADDR=
+            # - HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
             ## Spring data jpa configuration (optional)
@@ -33,15 +33,15 @@ services:
             # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             # - MYSQL_DRIVER=com.mysql.jdbc.Driver
             ## MeasurePlatform packaging (optional)
-            # - ZIP_URL=https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform-1.0.1/MeasurePlatform.V1.0.1.zip
-            # - ZIP_FILE=MeasurePlatform.V1.0.1.zip
-            # - JAR_FILE=measure-platform-1.0.1.war
+            # - ZIP_URL=https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform-1.0.2/MeasurePlatform.V1.0.2.zip
+            # - ZIP_FILE=MeasurePlatform.V1.0.2.zip
+            # - JAR_FILE=measure-platform-1.0.2.war
             ## Datasource catalogue (optional)
             # - ZIP_CATALOGUE_URL=https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip
             # - ZIP_CATALOGUE_FILE=DataSourceCatalog.zip
             ## Datasources storage path (optional)
-            # - MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures/
-            # - MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications/
+            # - MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures
+            # - MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications
             ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
             - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
             ## Mailing service configuration (mandatory)
@@ -71,7 +71,7 @@ services:
             - kibana
         environment:
             ## The Host IP address configuration (optional) 
-            #- HOST_IP_ADDR=
+            # - HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
             ## Spring data jpa configuration (optional)
