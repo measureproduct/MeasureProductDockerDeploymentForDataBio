@@ -13,8 +13,8 @@ services:
     measureplatform-app:
         container_name: measureplatform-app
         build: 
-            context: ./measure-platform
-        entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "java","-jar","measure-platform-1.0.2.war"]
+            context: ./measure-platform-for-databio
+        entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "java","-jar","measure-platform-for-databio-1.0.0.war"]
         networks:
             - default
         depends_on:
@@ -33,12 +33,12 @@ services:
             # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             # - MYSQL_DRIVER=com.mysql.jdbc.Driver
             ## MeasurePlatform packaging (optional)
-            # - ZIP_URL=https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform-1.0.2/MeasurePlatform.V1.0.2.zip
-            # - ZIP_FILE=MeasurePlatform.V1.0.2.zip
-            # - JAR_FILE=measure-platform-1.0.2.war
+            # - ZIP_URL=https://github.com/measureproduct/MeasurePlatformForDatabio/releases/download/v1.0.0/MeasurePlatformForDataBio-1.0.0.zip
+            # - ZIP_FILE=MeasurePlatformForDataBio-1.0.0.zip
+            # - JAR_FILE=measure-platform-for-databio-1.0.0.war
             ## Datasource catalogue (optional)
-            # - ZIP_CATALOGUE_URL=https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip
-            # - ZIP_CATALOGUE_FILE=DataSourceCatalog.zip
+            # - ZIP_CATALOGUE_URL=https://github.com/measureproduct/MeasurePlatformForDatabio/releases/download/v1.0.0/DataBioDataSourceCatalog.zip
+            # - ZIP_CATALOGUE_FILE=DataBioDataSourceCatalog.zip
             ## Datasources storage path (optional)
             # - MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures
             # - MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications
@@ -56,40 +56,23 @@ services:
             - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST=
         expose:
             - 8080
-    qualityguard-app:
-        container_name: qualityguard-app
+    hawk-server-app:
+        container_name: hawk-server-app
         build: 
-            context: ./qualityguard
-        entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "java","-jar","quality-guard-analysis-1.2.0.war"]
+            context: ./hawk-server
         networks:
             - default
-        depends_on:
-            - measure-reverse-proxy
-            - measureplatform-app
-            - mysql-db
-            - elasticsearch
-            - kibana
         environment:
             ## The Host IP address configuration (optional) 
             # - HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
-            ## Spring data jpa configuration (optional)
-            # - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/qualityguard?useUnicode=true&characterEncoding=utf8&useSSL=false
-            # - MYSQL_USER=root
-            # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-            # - MYSQL_DRIVER=com.mysql.jdbc.Driver
-            ## QualityGuard packaging (optional)
-            # - ZIP_URL=https://github.com/measureproduct/QualityGuard/releases/download/v1.2.0/quality-guard-v1.2.0.zip
-            # - ZIP_FILE=quality-guard-v1.2.0.zip
-            # - JAR_FILE=quality-guard-analysis-1.2.0.war
-            ## MeasurePlatform administrator (optional)
-            # - MEASURE_PLATFORM_LOGIN=admin
-            # - MEASURE_PLATFORM_PASSWORD=admin
-            ## Elasticsearch configuration (It should take the value of the elasticsearch environment variable "cluster.name")
-            - ELASTICSEARCH_CLUSTER_NAME=docker-cluster
+            # Hawk packaging
+            # - ZIP_URL=https://github.com/mondo-project/mondo-hawk/releases/download/v1.2.0-rc3/hawk-server-nogpl_20190202170100-linux.gtk.x86_64.zip
+            # - ZIP_FILE=hawk-server-nogpl_20190202170100-linux.gtk.x86_64.zip
+            # - SCRIPT_FILE=hawk-server-nogpl_20190202170100/run-server.sh
         expose:
-            - 8085
+            - 8089
     mysql-db:
         container_name: mysql-db
         image: mysql:5.7

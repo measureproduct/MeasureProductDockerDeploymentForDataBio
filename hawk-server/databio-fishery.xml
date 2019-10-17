@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hawk backend="org.hawk.greycat.LevelDBGreycatDatabase" name="${HAWK_NAME}" factory="org.hawk.timeaware.factory.TimeAwareHawkFactory">
+    <delay max="0" min="0"/>
+    <plugins>
+        <plugin name="org.hawk.modelio.exml.listeners.ModelioGraphChangeListener"/>
+        <plugin name="org.hawk.modelio.exml.metamodel.ModelioMetaModelResourceFactory"/>
+        <plugin name="org.hawk.modelio.exml.model.ModelioModelResourceFactory"/>
+        <plugin name="org.hawk.timeaware.graph.TimeAwareModelUpdater"/>
+    </plugins>
+    <metamodels>
+        <metamodel location="home/hawk-server-nogpl_20190202170100/configuration/metamodel_descriptor_36.xml" uri="${HAWK_SVN_PATH}"/>
+    </metamodels>
+    <repositories>
+        <repository frozen="false" location="" pass="${HAWK_SVN_PASS}" type="org.hawk.svn.SvnManager" user="${HAWK_SVN_USER}"/>
+
+    </repositories>
+</hawk>
+

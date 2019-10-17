@@ -3,12 +3,6 @@
 wget ${ZIP_CATALOGUE_URL}
 unzip ./${ZIP_CATALOGUE_FILE} -d ./tmp
 
-find ./tmp/BusinessApplication -name '*.zip'| while read zipFile ; do
-    zipName="$(basename "${zipFile}" .zip)"
-    mkdir -p "${MEASURE_PLATFORM_STORAGE_APPLICATION}/${zipName}"
-    unzip "${zipFile}" -d  "${MEASURE_PLATFORM_STORAGE_APPLICATION}/${zipName}"
-done
-
 find ./tmp/Measure -name '*.zip'| while read zipFile ; do
     zipName="$(basename "${zipFile}" .zip)"
     mkdir -p "${MEASURE_PLATFORM_STORAGE_MEASURE}/${zipName}"

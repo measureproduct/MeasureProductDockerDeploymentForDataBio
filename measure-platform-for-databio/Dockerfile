@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-LABEL description="Image with the Measure-Platform"
+LABEL description="Image with the Measure-Platform-For-DataBio"
 
 WORKDIR /home
 
@@ -12,12 +12,12 @@ ENV MYSQL_USER=root
 ENV MYSQL_ALLOW_EMPTY_PASSWORD=yes
 ENV MYSQL_DRIVER=com.mysql.jdbc.Driver
 # MeasurePlatform packaging
-ENV ZIP_URL=https://github.com/measureproduct/MeasurePlatform/releases/download/MeasurePlatform-1.0.2/MeasurePlatform.V1.0.2.zip
-ENV ZIP_FILE=MeasurePlatform.V1.0.2.zip
-ENV JAR_FILE=measure-platform-1.0.2.war
+ENV ZIP_URL=https://github.com/measureproduct/MeasurePlatformForDatabio/releases/download/v1.0.0/MeasurePlatformForDataBio-1.0.0.zip
+ENV ZIP_FILE=MeasurePlatformForDataBio-1.0.0.zip
+ENV JAR_FILE=measure-platform-for-databio-1.0.0.war
 # Datasource catalogue
-ENV ZIP_CATALOGUE_URL=https://github.com/measureproduct/DataSourceCatalog/releases/download/v1.0.0/DataSourceCatalog.zip
-ENV ZIP_CATALOGUE_FILE=DataSourceCatalog.zip
+ENV ZIP_CATALOGUE_URL=https://github.com/measureproduct/MeasurePlatformForDatabio/releases/download/v1.0.0/DataBioDataSourceCatalog.zip
+ENV ZIP_CATALOGUE_FILE=DataBioDataSourceCatalog.zip
 # Datasources storage path
 ENV MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures
 ENV MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications
