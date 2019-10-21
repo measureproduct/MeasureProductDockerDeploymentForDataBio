@@ -54,6 +54,8 @@ services:
             - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=
             - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=
             - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST=
+        volumes:
+            - measuresdata:/home/PackagedPlatform/storage/measures
         expose:
             - 8080
     hawk-server:
@@ -82,9 +84,6 @@ services:
         image: mysql:5.7
         depends_on: 
             - measure-reverse-proxy
-        volumes: 
-            - ./data/sql-scripts:/docker-entrypoint-initdb.d/
-            # - ./data/mysql:/var/lib/mysql/
         networks:
             - default
         environment:
@@ -92,6 +91,9 @@ services:
             - MYSQL_USER=root
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
             - MYSQL_DATABASE=measureplatform
+        volumes:
+            - ./data/sql-scripts:/docker-entrypoint-initdb.d/
+            - mysqldata:/var/lib/mysql/
         expose:
             - 3306
         command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
@@ -106,6 +108,8 @@ services:
             cluster.name: docker-cluster
             ES_JAVA_OPTS: -Xms2g -Xmx2g
             discovery.type: single-node
+        volumes:
+            - esdata:/usr/share/elasticsearch/data
         expose:
             - 9200
             - 9300
@@ -124,3 +128,10 @@ services:
             - elasticsearch
         expose:
             - 5601
+volumes:
+    esdata:
+        driver: local
+    mysqldata:
+        driver: local
+    measuresdata:
+        driver: local
