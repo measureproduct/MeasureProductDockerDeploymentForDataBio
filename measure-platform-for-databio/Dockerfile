@@ -16,10 +16,11 @@ ENV ZIP_URL=https://github.com/measureproduct/MeasurePlatformForDatabio/releases
 ENV ZIP_FILE=MeasurePlatformForDataBio-1.0.0.zip
 ENV JAR_FILE=measure-platform-for-databio-1.0.0.war
 # Datasource catalogue
-ENV ZIP_CATALOGUE_URL=https://github.com/measureproduct/MeasurePlatformForDatabio/releases/download/v1.0.1/DataBioDataSourceCatalog.zip
+ENV ZIP_CATALOGUE_URL=https://github.com/measureproduct/MeasurePlatformForDatabio/releases/download/v1.0.2/DataBioDataSourceCatalog.zip
 ENV ZIP_CATALOGUE_FILE=DataBioDataSourceCatalog.zip
 # Datasources storage path
 ENV MEASURE_PLATFORM_STORAGE_MEASURE=/home/PackagedPlatform/storage/measures
+ENV MEASURE_PLATFORM_STORAGE_APPLICATION=/home/PackagedPlatform/storage/applications
 # Elasticsearch configuration
 ENV ELASTICSEARCH_CLUSTER_NAME=docker-cluster
 # Mailing service configuration

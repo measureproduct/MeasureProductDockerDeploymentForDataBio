@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Choose a name for your Hawk Instance-->
-<hawk backend="org.hawk.greycat.LevelDBGreycatDatabase" name="Model-Example" factory="org.hawk.timeaware.factory.TimeAwareHawkFactory">
+<!--Choose a name for your Hawk Instance by replacing "DataBioForestry" with a name of your chhosing-->
+<hawk backend="org.hawk.greycat.LevelDBGreycatDatabase" name="DataBioForestry" factory="org.hawk.timeaware.factory.TimeAwareHawkFactory">
     <delay max="0" min="0"/>
     <plugins>
         <plugin name="org.hawk.modelio.exml.listeners.ModelioGraphChangeListener"/>
@@ -9,13 +9,13 @@
         <plugin name="org.hawk.timeaware.graph.TimeAwareModelUpdater"/>
     </plugins>
     <metamodels>
-        <!--Change the path of your metamodel descriptor according to Modelio version of your model-->
+        <!--Specify a metamodel descriptor for your modelio model-->
         <metamodel location="/home/hawk-server-nogpl_20190202170100/metamodels/metamodel_descriptor_V3.6.xml" uri=""/>
     </metamodels>
     <repositories>
-        <!--Add your model repository here-->
-        <!-- location="{SVN_PATH}" pass="{SVN_PASSWORD}" user="{SVN_USER}"-->
-        <repository frozen="false" location="https://rd.constellation.modeliosoft.com/svn/0dbe5d64-45fc-46ca-bf33-cbbd98868aee/trunk/model" pass="" type="org.hawk.svn.SvnManager" user=""/>
+        <!--Add the SVN URL of your model repository and add the user and password for your SVN-->
+        <repository frozen="false" location="https://rd.constellation.modeliosoft.com/svn/a848a7b4-b61f-4b86-825d-bce1df943de3/trunk/model" 
+            pass="" type="org.hawk.svn.SvnManager" user="" />
 
     </repositories>
 </hawk>
