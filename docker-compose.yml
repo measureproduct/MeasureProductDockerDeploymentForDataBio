@@ -65,7 +65,7 @@ services:
             context: ./hawk-server
         networks:
             - default
-       # environment:
+        # environment:
             ## The Host IP address configuration (optional) 
             # - HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
@@ -76,10 +76,8 @@ services:
             # - SCRIPT_FILE=hawk-server-nogpl_20190202170100/run-server.sh
         expose:
             - 8089
-        #ports:
-        #    - 8089:8089
-        # volumes:
-        #    - ./data/hawk-instances:/home/hawk-instances
+        volumes:
+            - ./data/hawk-instances:/home/hawk-instances:ro
     mysql-db:
         container_name: mysql-db
         image: mysql:5.7
