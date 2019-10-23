@@ -65,15 +65,18 @@ services:
             context: ./hawk-server
         networks:
             - default
-        # environment:
+        environment:
             ## The Host IP address configuration (optional) 
             # - HOST_IP_ADDR=
             ## Docker base image jvm memory allocation (optional)
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
-            # Hawk packaging
+            ## Hawk packaging
             # - ZIP_URL=https://github.com/mondo-project/mondo-hawk/releases/download/v1.2.0-rc3/hawk-server-nogpl_20190202170100-linux.gtk.x86_64.zip
             # - ZIP_FILE=hawk-server-nogpl_20190202170100-linux.gtk.x86_64.zip
-            # - SCRIPT_FILE=hawk-server-nogpl_20190202170100/run-server.sh
+            ## Hawk config
+            # - HAWK_PORT=8089
+            - HAWK_INSTANCES_HOST_PATH=./data/hawk-instances
+            - HAWK_INSTANCES_CONTAINER_PATH=/home/hawk-instances
         expose:
             - 8089
         volumes:

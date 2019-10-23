@@ -15,7 +15,7 @@
     <repositories>
         <!--Add the SVN URL of your model repository and add the user and password for your SVN-->
         <repository frozen="false" location="https://rd.constellation.modeliosoft.com/svn/a848a7b4-b61f-4b86-825d-bce1df943de3/trunk/model" 
-            pass="hawk" type="org.hawk.svn.SvnManager" user="hawk" />
+            pass="" type="org.hawk.svn.SvnManager" user="" />
 
     </repositories>
 </hawk>
