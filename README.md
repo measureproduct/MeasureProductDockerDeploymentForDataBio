@@ -7,3 +7,15 @@ This project is an implementation of dockerization of **[Measure Platform](http:
 
 ![Image of Yaktocat](https://github.com/measureproduct/MeasureProductDockerDeploymentForDataBio/raw/master/resources/databio-footer.png)
 
+## Setup Measure Platform on your machine
+
+
+## Monitoring DataBio Enterprise Architecture Models (ArchiMate) in Measure Platform
+
+
+### Adding new Measures
+Select Metric from the catalog
+
+
+### Create Dashboards for visualization
+
