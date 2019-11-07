@@ -20,7 +20,7 @@ git clone https://github.com/measureproduct/MeasureProductDockerDeploymentForDat
 ```bash
 docker-compose up
 ```
-
+5. After Measure Platform is built, you can access it by default at the following URL: `http://localhost/measure/` 
 
 ## Monitoring DataBio Enterprise Architecture Models (ArchiMate)
 
