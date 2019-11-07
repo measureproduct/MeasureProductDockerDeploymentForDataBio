@@ -10,7 +10,7 @@ This project is an implementation of dockerization of **[Measure Platform](http:
 ## Setup Measure Platform on your machine
 
 
-## Monitoring DataBio Enterprise Architecture Models (ArchiMate) in Measure Platform
+## Monitoring DataBio Enterprise Architecture Models (ArchiMate)
 
 
 ### Adding new Measures
