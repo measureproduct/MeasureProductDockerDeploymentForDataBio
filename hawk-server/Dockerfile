@@ -12,7 +12,7 @@ ENV ZIP_URL=https://github.com/mondo-project/mondo-hawk/releases/download/v1.2.0
 ENV ZIP_FILE=hawk-server-nogpl_20190202170100-linux.gtk.x86_64.zip
 
 # Hawk config
-ENV HAWK_PORT=8089
+#ENV HAWK_PORT=8089
 ENV HAWK_INSTANCES_HOST_PATH=./hawk-instances
 # must add a volume at this path when running the image
 ENV HAWK_INSTANCES_CONTAINER_PATH=/home/hawk-instances
