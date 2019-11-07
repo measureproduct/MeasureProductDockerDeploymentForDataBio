@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Choose a name for your Hawk Instance by replacing "DataBioForestry" with a name of your chhosing-->
+<!--Choose a name for your Hawk Instance by replacing "DataBioForestry" with a name of your choosing-->
 <hawk backend="org.hawk.greycat.LevelDBGreycatDatabase" name="DataBioForestry" factory="org.hawk.timeaware.factory.TimeAwareHawkFactory">
     <delay max="0" min="0"/>
     <plugins>
