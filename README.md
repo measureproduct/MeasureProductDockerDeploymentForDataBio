@@ -6,5 +6,5 @@ This project is an implementation of dockerization of **[Measure Platform](http:
 ![logo]: http://measure-platform.org/wp-content/uploads/2019/04/logo-platform.png "Logo Title Text 2"
 
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+![logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 
