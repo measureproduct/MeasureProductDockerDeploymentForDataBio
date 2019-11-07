@@ -10,7 +10,11 @@ This project is an implementation of dockerization of **[Measure Platform](http:
 ## Setup Measure Platform on your machine
 
 1. First Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) on you machine.  
-2. Second download  project repository either by downloading the zip file and unzipping it in a custom folder on you machine or by running the command `git clone https://github.com/measureproduct/MeasureProductDockerDeploymentForDataBio.git` that requires [Git](https://git-scm.com/) to be installed.
+2. Second download  project repository either by downloading the zip file and unzipping it in a custom folder on you machine or by running the command 
+```bash
+git clone https://github.com/measureproduct/MeasureProductDockerDeploymentForDataBio.git
+```
+that requires [Git](https://git-scm.com/) to be installed.
 3. Run the following command to
 
 ## Monitoring DataBio Enterprise Architecture Models (ArchiMate)
