@@ -14,7 +14,13 @@ This project is an implementation of dockerization of **[Measure Platform](http:
 ```bash
 git clone https://github.com/measureproduct/MeasureProductDockerDeploymentForDataBio.git
 ```
-3. Run the following command to
+3. Add Hawk instances for the ArchiMate models that you want to monitor following the example ginven at this `location hawk-server/hawk-instances/hawk-instance-example1.xml` where you need to add the URL and the credentials of the SVN repository of your Model.
+
+4. Inside the project, run the following command to build Docker Images and launching the conatiners for Measure Platform and its dependencies
+```bash
+docker-compose up
+```
+
 
 ## Monitoring DataBio Enterprise Architecture Models (ArchiMate)
 
