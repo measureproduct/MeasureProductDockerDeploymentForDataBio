@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Choose a name for your Hawk Instance by replacing "DataBioForestry" with a name of your choosing-->
-<hawk backend="org.hawk.greycat.LevelDBGreycatDatabase" name="DataBioForestry" factory="org.hawk.timeaware.factory.TimeAwareHawkFactory">
+<!--Choose a name for your Hawk Instance by replacing "HAWK_INSTANCE_NAME" with a name of your choosing-->
+<hawk backend="org.hawk.greycat.LevelDBGreycatDatabase" name="HAWK_INSTANCE_NAME" factory="org.hawk.timeaware.factory.TimeAwareHawkFactory">
     <delay max="0" min="0"/>
     <plugins>
         <plugin name="org.hawk.modelio.exml.listeners.ModelioGraphChangeListener"/>
@@ -14,8 +14,8 @@
     </metamodels>
     <repositories>
         <!--Add the SVN URL of your model repository and add the user and password for your SVN-->
-        <repository frozen="false" location="https://rd.constellation.modeliosoft.com/svn/a848a7b4-b61f-4b86-825d-bce1df943de3/trunk/model" 
-            pass="" type="org.hawk.svn.SvnManager" user="" />
+        <repository frozen="false" location="SVN_MODEL_URL" 
+            type="org.hawk.svn.SvnManager"   user="SVN_MODEL_USERNAME" pass="SVN_MODEL_PASSWORD" />
 
     </repositories>
 </hawk>
