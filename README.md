@@ -31,3 +31,5 @@ Select Metric from the catalog
 
 ### Create Dashboards for visualization
 
+For more information about how to deploy Measure Platform for DataBio Models Analytics, consider watching the demo at the following link: https://youtu.be/FkD9Am8m5HU
+
